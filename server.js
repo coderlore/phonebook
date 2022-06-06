@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const PORT = 3000
 
-let people = [
+let persons = [
     { 
       "id": 1,
       "name": "Arto Hellas", 
@@ -25,19 +25,12 @@ let people = [
     }
 ]
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html')
-  })
 app.get('/api/persons', (request, response) => {
-    response.json(people)
+    response.json(persons)
   })
-app.post('/api/info', (request, response) => {
-    console.log(`I'm trying to post`)
-    // const body = request.body
-    // const person = {
-    //     content: body.content,
-    //     date: new Date(),
-    // }
+app.get('/info', (request, response) => {
+    const currentDate = new Date()
+    response.send(`<h2>Phonebook has info for ${persons.length} people</h2> <h2>${currentDate}</h2>`)
   })
   app.listen(process.env.PORT || PORT, ()=>{
     console.log(`The server is running on port ${PORT}! Betta Go Catch It!`)
