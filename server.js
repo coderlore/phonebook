@@ -22,11 +22,24 @@ let persons = [
       "id": 4,
       "name": "Mary Poppendieck", 
       "number": "39-23-6423122"
+    },
+    {  
+      "id": "unknown",
+      "name": "unknown",
+      "number": "unknown"
     }
 ]
 
 app.get('/api/persons', (request, response) => {
     response.json(persons)
+  })
+app.get('/api/persons/:id', (request, response) => {
+  const id = Number(request.params.id) - 1
+  if( persons[id] ){
+    response.json(persons[id]) 
+  }else{
+    response.json(persons['unknown'])
+  }
   })
 app.get('/info', (request, response) => {
     const currentDate = new Date()
